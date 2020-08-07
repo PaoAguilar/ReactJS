@@ -1,0 +1,14 @@
+@media (max-width: 64em) { /*  Ese tamaño de pantalla es pequeño entonces aplica otros estilos cuando se hace pequeña  */
+    .locationList {
+        max-height: 30vh; /* vh= view height, osea el tamaño de la pantalla */
+        overflow: auto; /* Es para habilitar el scroll cuando la pantalla sea pequeña */
+        margin-bottom: 20px;
+    }    
+}
+
+.forecast-title {
+    color: white;
+    text-align: center;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
