@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import ForecastItem from './ForecastItem'
+import ForecastItem from './ForecastItem';
+import transformForecast from './../services/transformForecast';
 import PropTypes from 'prop-types';
 import './styles.css';
 /*
@@ -17,6 +18,9 @@ const data = {
     wind: 'normal',
 };*/
 
+const api_key = "ec510d37c5213cde4dba18814c456931";
+const url_base_weather = "http://api.openweathermap.org/data/2.5/forecast";
+
 class ForecastExtended extends Component {
 
     constructor() {
@@ -26,8 +30,23 @@ class ForecastExtended extends Component {
         }
     }
 
+    componentDidMount() {
+        //fetch o axios (logra un nivel de covvertura para navegadores mas antiguos, fetch es bastante soportado pero axios tiene un nivel de covertura mayor - Axios es muy buena opcion)
+        const url_forecast = `${url_base_weather}?q=${this.props.city}&appid=${api_key}`;
+        // El fetch, genera una promise
+        fetch(url_forecast).then( // then, permite obtener el resultado una vez se termina de ejecutar la promise, no se ejecuta en forma sincronica, si no que se ejecuta la primera sentencia, y luego se ejecuta lo que hay dentro del then    
+            data => (data.json()),
+        ).then(
+            weather_data => {
+                console.log(weather_data);
+                const forecastData = transformForecast(weather_data);
+                this.setState({ forecastData })
+            }
+        );
+    }
+
     renderForecastItemDays() {
-        return 'Render Items';
+        return <h1>Render Items</h1>
         //return days.map(day => (<ForecastItem weekDay={day} hour={10} data={data} ></ForecastItem >));
     }
 
