@@ -1,7 +1,11 @@
+.locationList {
+    height: 85vh;
+    overflow: auto; /* Es para habilitar el scroll cuando la pantalla sea pequeña */
+}
+
 @media (max-width: 64em) { /*  Ese tamaño de pantalla es pequeño entonces aplica otros estilos cuando se hace pequeña  */
     .locationList {
-        max-height: 30vh; /* vh= view height, osea el tamaño de la pantalla */
-        overflow: auto; /* Es para habilitar el scroll cuando la pantalla sea pequeña */
+        max-height: 40vh; /* vh= view height, osea el tamaño de la pantalla */         
         margin-bottom: 20px;
     }    
 }

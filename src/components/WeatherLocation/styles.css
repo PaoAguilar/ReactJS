@@ -5,7 +5,6 @@
     text-align: left;
     color: #888;
     line-height: 35px;
-    overflow: auto;
 }
 
 .locationCont h1 {
@@ -14,12 +13,12 @@
 }
 
 .weatherLocationCont {
-    width: calc(100% - 20%);
+    width: calc(100% - 4%);
     margin-left: 10px;
     margin-right: 10px;
-    min-width: 350px;
+    min-width: 450px;
     box-sizing: border-box;
     padding: 25px;
     font-family: 'Roboto', sans-serif;
-    box-shadow: 10px 10px 40px -12px rgba(0, 0, 0, 75);
+    box-shadow: 10px 10px 42px -12px rgba(0, 0, 0, 0.75);
 }

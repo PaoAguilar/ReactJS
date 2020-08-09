@@ -31,8 +31,19 @@ class ForecastExtended extends Component {
     }
 
     componentDidMount() {
+        this.updateCity(this.props.city)
+    }
+
+    componentWillReceiveProps(nextProps) {  // Es otro metodo del ciclo de vida del componente y Se ejecuta cada vez que hay una actualizacion de las propiedades, como parametro estan las proximas propiedades a establecer (o sea aun no estan). este es un punto previo al establecimiento de las propiedades y previo a la actualizacion del componente
+        if (nextProps.city !== this.props.city) {   // nextProps.city, es diferente a la city que esta actualmente?
+            this.setState({ forecastData: null });
+            this.updateCity(nextProps.city) // Si es diferente,
+        }
+    }
+
+    updateCity = city => {
         //fetch o axios (logra un nivel de covvertura para navegadores mas antiguos, fetch es bastante soportado pero axios tiene un nivel de covertura mayor - Axios es muy buena opcion)
-        const url_forecast = `${url_base_weather}?q=${this.props.city}&appid=${api_key}`;
+        const url_forecast = `${url_base_weather}?q=${city}&appid=${api_key}`;
         // El fetch, genera una promise
         fetch(url_forecast).then( // then, permite obtener el resultado una vez se termina de ejecutar la promise, no se ejecuta en forma sincronica, si no que se ejecuta la primera sentencia, y luego se ejecuta lo que hay dentro del then    
             data => (data.json()),
