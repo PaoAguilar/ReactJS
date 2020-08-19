@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Paper from '@material-ui/core/Paper';
 import AppBar from '@material-ui/core/AppBar';
 import Typography from '@material-ui/core/Typography';
 import Toolbar from '@material-ui/core/Toolbar';
+import PropTypes from 'prop-types';
 import { Grid, Col, Row } from 'react-flexbox-grid';
-import './App.css';
 import LocationList from './components/LocationList';
 import ForecastExtended from './components/ForecastExtended';
+import { setCity } from './actions';
+
+import './App.css';
 
 const cities = [
   'San Salvador,sv',
@@ -27,6 +31,7 @@ class App extends Component {
   handleSelectedLocation = city => { // LocationList trae el parametro city a esta funcion
     this.setState({ city }) // esto es equivalente a {city: city}, se llaman igual
     console.log(`handleSelectedLocation ${city}`);
+    this.props.setCity(city); // el dispatch ayuda a disparar la accion
   }
   render() {
     const { city } = this.state;
@@ -64,4 +69,16 @@ class App extends Component {
   }
 }
 
-export default App;
+App.propTypes = {
+  setCity: PropTypes.func.isRequired,
+}
+
+const mapDispatchToPropsActions = dispatch => ({
+  setCity: value => dispatch(setCity(value))
+});
+
+export default connect(null, mapDispatchToPropsActions)(App);
+
+/*Se puede separar:
+const AppConnected = connect...
+export default AppConnected*/
